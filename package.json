@@ -1,10 +1,10 @@
 {
-    "name": "strict-paredit",
-    "displayName": "Strict Paredit",
-    "description": "Classic strict paredit: structural editing and navigation",
-    "version": "0.2.0",
+    "name": "not-strict-paredit",
+    "displayName": "Not Strict Paredit",
+    "description": "Not strict paredit: structural editing and navigation",
+    "version": "0.2.1",
     "icon": "assets/paredit.png",
-    "publisher": "ailisp",
+    "publisher": "sogaiu",
     "license": "MIT",
     "engines": {
         "vscode": "^1.34.0"
@@ -30,7 +30,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/ailisp/strict-paredit"
+        "url": "https://github.com/sogaiu/not-strict-paredit-vscode"
     },
     "activationEvents": [
         "onLanguage:commonlisp",
@@ -76,7 +76,7 @@
                     "paredit.defaultKeyMap": {
                         "type": "string",
                         "description": "The default keymap to use for bindings when there is no custom binding.",
-                        "default": "strict",
+                        "default": "original",
                         "enum": [
                             "strict",
                             "original",
@@ -301,12 +301,12 @@
             },
             {
                 "command": "paredit.forwardDownSexp",
-                "key": "ctrl+alt+down",
+                "key": "ctrl+alt+d",
                 "when": "editorLangId =~ /commonlisp|clojure|fennel|janet|scheme|lisp/ && paredit:keyMap =~ /original|strict/ && editorTextFocus && !editorReadOnly"
             },
             {
                 "command": "paredit.backwardUpSexp",
-                "key": "ctrl+alt+up",
+                "key": "ctrl+alt+u",
                 "when": "editorLangId =~ /commonlisp|clojure|fennel|janet|scheme|lisp/ && paredit:keyMap =~ /original|strict/ && editorTextFocus && !editorReadOnly"
             },
             {
@@ -375,18 +375,22 @@
             },
             {
                 "command": "paredit.slurpSexpForward",
+                "key": "ctrl+shift+0",
                 "when": "editorLangId =~ /commonlisp|clojure|fennel|janet|scheme|lisp/ && paredit:keyMap =~ /original|strict/ && editorTextFocus && !editorReadOnly"
             },
             {
                 "command": "paredit.slurpSexpBackward",
+                "key": "ctrl+shit+9",
                 "when": "editorLangId =~ /commonlisp|clojure|fennel|janet|scheme|lisp/ && paredit:keyMap =~ /original|strict/ && editorTextFocus && !editorReadOnly"
             },
             {
                 "command": "paredit.barfSexpForward",
+                "key": "ctrl+shit+]",
                 "when": "editorLangId =~ /commonlisp|clojure|fennel|janet|scheme|lisp/ && paredit:keyMap =~ /original|strict/ && editorTextFocus && !editorReadOnly"
             },
             {
                 "command": "paredit.barfSexpBackward",
+                "key": "ctrl+shift+[",
                 "when": "editorLangId =~ /commonlisp|clojure|fennel|janet|scheme|lisp/ && paredit:keyMap =~ /original|strict/ && editorTextFocus && !editorReadOnly"
             },
             {
@@ -399,6 +403,7 @@
             },
             {
                 "command": "paredit.killSexpForward",
+                "key": "ctrl+alt+k",
                 "when": "editorLangId =~ /commonlisp|clojure|fennel|janet|scheme|lisp/ && paredit:keyMap =~ /original|strict/ && editorTextFocus && !editorReadOnly"
             },
             {

@@ -1,96 +1,94 @@
-# Strict Paredit
+# Not Strict Paredit
 
-Classic, Emacs Paredit-like Structural editing and navigation for Common Lisp, Clojure and Scheme.
+Subset of Emacs Paredit-like Structural editing and navigation for Common Lisp, Clojure, Fennel, Janet and Scheme.
 
-<p align="center">
-<a href="https://marketplace.visualstudio.com/items?itemName=ailisp.strict-paredit"><img width="128px" height="128px" src="https://github.com/ailisp/strict-paredit-vscode/raw/master/assets/paredit.png" title="Paredit icon"></img></a>
-</p>
+This is a [Paredit](http://mumble.net/~campbell/emacs/paredit.el) extension for [Visual Studio Code](https://code.visualstudio.com).  It is a thin wrapper around [paredit.js](http://robert.kra.hn/projects/paredit-js).
 
-This is a [Paredit](http://mumble.net/~campbell/emacs/paredit.el) extension for [Visual Studio Code](https://code.visualstudio.com). It is a thin wrapper around [paredit.js](http://robert.kra.hn/projects/paredit-js). You find it inside Code's extension view and on [the Marketplace](https://marketplace.visualstudio.com/items?itemName=ailisp.strict-paredit).
+This is a fork of [Strict Paredit](https://github.com/ailisp/strict-paredit-vscode) including the following changes:
 
+* Not strict by default
+* Remove and tweak some keybindings
+* Support for Fennel and Janet
+* Update dependencies
+
+N.B. The default state has very few key bindings because:
+
+* I don't use most of paredit's commands
+* The defaults completely ignore some common conventions
 
 ## Commands
 
-Note: You can choose to disable all default key bindings by configuring `paredit.defaultKeyMap` to `none`. (Then you probably also want to register your own shortcuts for the commands you often use. see `ets/keys.json` for example). By default the strict mode map is used. Below commands work in both strict mode and original mode.
+Note: You can choose to disable all default key bindings by configuring `paredit.defaultKeyMap` to `none`. (Then you probably also want to register your own shortcuts for the commands you often use. see `etc/keys.json` for example). By default the strict mode map is not used. Below commands work in both strict mode and original mode.
+
+Note: Apparently, it is necessary to write bindings like "ctrl+shift+0" instead of "ctrl+)" when specifying settings.  I don't do this below as it doesn't seem to aid memory at all, let alone help make a link with the original commands in Emacs.
 
 ### Navigation
 
 Default keybinding | Action
 ------------------ | ------
-ctrl+right         | Forward Sexp
-ctrl+left          | Backward Sexp
-ctrl+down          | Forward Down Sexp
-ctrl+up            | Backward Up Sexp
-ctrl+alt+right     | Close List
+ctrl+alt+f         | Forward Sexp
+ctrl+alt+b         | Backward Sexp
+ctrl+alt+d         | Forward Down Sexp
+ctrl+alt+u         | Backward Up Sexp
+None               | Close List
 
 ### Selecting
 
 Default keybinding | Action
 ------------------ | ------
-ctrl+w             | Expand Selection
-ctrl+shift+w       | Shrink Selection
-ctrl+alt+w         | Select Current Top Level Form
+None               | Expand Selection
+None               | Shrink Selection
+None               | Select Current Top Level Form
 
 ### Editing
 
-Default keybinding                | Action
-------------------                | ------
-ctrl+alt+.                        | Slurp Forward
-ctrl+alt+<                        | Slurp Backward
-ctrl+alt+,                        | Barf Forward
-ctrl+alt+>                        | Barf Backward
-ctrl+alt+s                        | Splice
-ctrl+alt+shift+s                  | Split Sexp
-ctrl+delete                       | Kill Sexp Forward
-ctrl+shift+backspace (on Mac)     | Kill Sexp Forward
-ctrl+backspace                    | Kill Sexp Backward
-ctrl+alt+down                     | Splice & Kill Forward
-ctrl+alt+up                       | Splice & Kill Backward
-ctrl+alt+(                        | Wrap Around ()
-ctrl+alt+[                        | Wrap Around []
-ctrl+alt+{                        | Wrap Around {}
-ctrl+alt+i                        | Indent
-ctrl+alt+t                        | Transpose
+Default keybinding | Action
+------------------ | ------
+ctrl+)             | Slurp Forward
+ctrl+(             | Slurp Backward
+ctrl+}             | Barf Forward
+ctrl+{             | Barf Backward
+None               | Splice
+None               | Split Sexp
+ctrl+alt+k         | Kill Sexp Forward
+None               | Kill Sexp Backward
+None               | Splice & Kill Forward
+None               | Splice & Kill Backward
+None               | Wrap Around ()
+None               | Wrap Around []
+None               | Wrap Around {}
+None               | Indent
+ctrl+alt+t         | Transpose
 
 ## Strict only keybinding
-Strict mode keybinding            | Action
-----------------------            | ------
-backspace                         | Delete Backward or move left if at `)]}`
-delete                            | Delete Forward or move right if at `)]}`
-shift+backspace (on Mac)          | Delete Forward or move right if at `)]}`
-ctrl+alt+backspace                | Force Delete Backward
-ctrl+alt+delete                   | Force Delete Forward
-alt+shift+backspace (on Mac)      | Force Delete Forward
+Strict mode keybinding | Action
+---------------------- | ------
+None                   | Delete Backward or move left if at `)]}`
+None                   | Delete Forward or move right if at `)]}`
+None                   | Delete Forward or move right if at `)]}`
+None                   | Force Delete Backward
+None                   | Force Delete Forward
+None                   | Force Delete Forward
 
-NB: **Strict mode is enabled by default.** The backspace and delete keys won't let you remove parentheses or brackets so they become unbalanced. To force a delete anyway, use the supplied commands for that. Strict mode can be switched on/off by configuring `paredit.defaultKeyMap` to `strict`/`original`.
+NB: **Strict mode is disabled by default.** In strict mode, the backspace and delete keys won't let you remove parentheses or brackets so they become unbalanced. To force a delete anyway, use the supplied commands for that. Strict mode can be switched on/off by configuring `paredit.defaultKeyMap` to `strict`/`original`.
 
 
 ### Copying/Yanking
 
 Default keybinding | Action
 ------------------ | ------
-ctrl+alt+c ctrl+right         | Copy Forward Sexp
-ctrl+alt+c ctrl+left          | Copy Backward Sexp
-ctrl+alt+c ctrl+down          | Copy Forward Down Sexp
-ctrl+alt+c ctrl+up            | Copy Backward Up Sexp
-ctrl+alt+c ctrl+alt+right     | Copy Close List
+None               | Copy Forward Sexp
+None               | Copy Backward Sexp
+None               | Copy Forward Down Sexp
+None               | Copy Backward Up Sexp
+None               | Copy Close List
 
 ### Cutting
 
 Default keybinding | Action
 ------------------ | ------
-ctrl+alt+x ctrl+right         | Cut Forward Sexp
-ctrl+alt+x ctrl+left          | Cut Backward Sexp
-ctrl+alt+x ctrl+down          | Cut Forward Down Sexp
-ctrl+alt+x ctrl+up            | Cut Backward Up Sexp
-ctrl+alt+x ctrl+alt+right     | Cut Close List
-
-## Maintainers
-
-This project is forked from https://github.com/BetterThanTomorrow/calva-paredit. Original one is maintained by author Peter Strömberg as part of project calva, https://github.com/BetterThanTomorrow/calva
-
-I maintain this fork with the following stress:
-- Tweak to keep the joy of original Emacs paredit, especially how delete, back parens and navigation works.
-- Make it useful for Common Lisp and Scheme developers (Assume there's no one use vscode to code Emacs Lisp :)
-
-
+None               | Cut Forward Sexp
+None               | Cut Backward Sexp
+None               | Cut Forward Down Sexp
+None               | Cut Backward Up Sexp
+None               | Cut Close List
